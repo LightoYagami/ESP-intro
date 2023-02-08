@@ -1,20 +1,24 @@
 #include <Arduino.h>
 
-void setup(){
-  Serial.begin(115200);
-  pinMode(2,OUTPUT);
-  Serial.print("Coming from setup");
+int val  =  0;
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+   Serial.begin(9600);
 }
 
-void loop(){
-    Serial.println(touchRead(4));
-    Serial.print("Coming from loop");
-    delay(300);
+void loop() {  
+   val = hallRead();
+   if(val >= 80) {
+     digitalWrite(LED_BUILTIN, HIGH);
+     delay(1000);
+     }
+   
+   else {
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(2000);
 
-    if(touchRead(4) > 40){
-        digitalWrite(2, LOW);
-    }
-    else{
-        digitalWrite(2, HIGH);
-    }
+   //Serial.println(val);
+   delay(200);
+  }
 }
+
